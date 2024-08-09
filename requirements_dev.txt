@@ -1,0 +1,12 @@
+pillow==6.2.2
+munkres==1.1.2
+#cython==0.29.15
+pycocotools==2.0.0
+scikit-image==0.15.0
+matplotlib==3.0.0
+pandas==0.25.1
+opencv-python==4.2.0.32
+#pt-get install -y libglib2.0-0
+#apt-get install -y libsm6
+#apt-get install libxrender1 -y
+#apt-get install libxext6 -y

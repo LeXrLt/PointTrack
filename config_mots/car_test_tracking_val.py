@@ -34,7 +34,7 @@ args = dict(
             'ex':0.2
         },
         'batch_size': 1,
-        'workers': 32
+        'workers': 1
     },
 
     model={

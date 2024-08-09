@@ -41,10 +41,13 @@ if args['save']:
 device = torch.device("cuda:0" if args['cuda'] else "cpu")
 
 # dataloader
+print('+++', args['dataset']['name'], args['dataset']['kwargs'])
 dataset = get_dataset(
     args['dataset']['name'], args['dataset']['kwargs'])
+print('+++', dataset)
 dataset_it = torch.utils.data.DataLoader(
-    dataset, batch_size=1, shuffle=False, drop_last=False, num_workers=4, pin_memory=True if args['cuda'] else False)
+    dataset, batch_size=1, shuffle=False, drop_last=False, num_workers=1, pin_memory=True if args['cuda'] else False)
+print('+++', dataset_it, len(dataset_it))
 
 # load model
 model = get_model(args['model']['name'], args['model']['kwargs'])
@@ -86,6 +89,7 @@ with torch.no_grad():
 
     for sample in tqdm(dataset_it):
         subf, frameCount = sample['name'][0][:-4].split('/')[-2:]
+        print('+++', subf, frameCount)
         frameCount = int(float(frameCount))
 
         # MOTS forward with tracking
@@ -103,6 +107,7 @@ with torch.no_grad():
         # do tracking
         trackHelper.tracking(subf, frameCount, embeds, masks)
 
+    print('+++ trackHelper.export_last_video')
     trackHelper.export_last_video()
 
 if 'run_eval' in args.keys() and args['run_eval']:
